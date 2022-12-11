@@ -23,13 +23,21 @@ class App extends React.Component {
   render() {
 
   const {tasks} = this.state ;
+  const [count, setCount] = useState(0);
+  const incrementCount = () => {
+    // Update state with incremented value
+    setCount(count + 1);
+  };
 
     return (
         <div className="app">
         <form className="form">
           <input type="text" class="form-item" placeholder="Ajouter une tâche">
         </form>
-        <p className="counter">2 tâches en cours</p>
+       
+        <p className="counter">{count}</p>
+       
+        <button onClick={incrementCount}>Click Here</button>
         <ul className="list">
                {tasks.map((task, index) => ( 
             <li
@@ -39,6 +47,7 @@ class App extends React.Component {
             </li>
           ))}
         </ul>
+
       </div>
     );
   }
