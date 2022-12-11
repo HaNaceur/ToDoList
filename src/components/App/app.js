@@ -35,9 +35,10 @@ class App extends React.Component {
           <input type="text" class="form-item" placeholder="Ajouter une tâche">
         </form>
        
-        <p className="counter">{count}</p>
-       
-        <button onClick={incrementCount}>Click Here</button>
+        <p className="counter">{count} Tâches en cour {count > 1 && 's'}</p>
+        <label> 
+        <input type="checkbox" onClick={incrementCount} />
+        </label>
         <ul className="list">
                {tasks.map((task, index) => ( 
             <li
