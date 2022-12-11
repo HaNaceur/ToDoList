@@ -17,6 +17,7 @@ class App extends React.Component {
 
   componentDidMount(){
     const {tasks} = this.state;
+
   }
 
 
@@ -28,16 +29,26 @@ class App extends React.Component {
     // Update state with incremented value
     setCount(count + 1);
   };
+  const {tasks} = this.state;
+  const [checked, setChecked] = React.useState(false);
+  const placeholder = 'Add a task';
+
+const handleChange = () => {
+  setChecked(!checked);
+};
 
     return (
         <div className="app">
         <form className="form">
-          <input type="text" class="form-item" placeholder="Ajouter une tâche">
+         <input type="text" className="form-item" placeholder={placeholder}
+         />
         </form>
        
         <p className="counter">{count} Tâches en cour {count > 1 && 's'}</p>
         <label> 
-        <input type="checkbox" onClick={incrementCount} />
+        <input type="checkbox" checked={checked}
+          onChange={handleChange} onClick={incrementCount} 
+        />
         </label>
         <ul className="list">
                {tasks.map((task, index) => ( 
