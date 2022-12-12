@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.scss';
+import './style.scss';
 
-class Form extends React.Component {
+class Form extends React.PureComponent {
   state = {
     inputValue: '',
   };

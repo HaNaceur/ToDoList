@@ -4,9 +4,9 @@ import Form from '../Form/Form';
 import Tasks from '../Tasks/Tasks';
 import tasksData from '../../data/tasks';
 
-import './styles.scss';
+import './style.scss';
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ class App extends React.Component {
 
   addTask = (taskLabel) => {
     const { tasks } = this.state;
-    const ids = tasks.map((task) => task.id);
+    const ids = tasks.map((task) => task.id); // [42,1,10,12]
     const maxId = Math.max(...ids);
 
     const newTask = {
@@ -26,7 +26,6 @@ class App extends React.Component {
     };
 
     const newTasks = [...tasks, newTask];
-
     this.setState({
       tasks: newTasks,
     });
