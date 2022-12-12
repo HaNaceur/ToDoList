@@ -6,11 +6,21 @@
   border: 1px solid v.$color-task-border;
   border-radius: 3px;
   margin-bottom: v.$gutter * 0.5;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   &--done {
     text-decoration: line-through;
     opacity: 0.5;
   }
   &__checkbox {
     margin-right: v.$gutter;
+  }
+
+  &__btn-delete {
+    border: none;
+    color: rgb(201, 16, 16);
   }
 }

@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import Task from '../Task/Task';
 
-function Tasks({ tasks, setTaskDone }) {
+function Tasks({ tasks, setTaskDone, deleteTask }) {
   return (
     <ul className="tasks">
       {tasks.map((task) => (
         <Task
           key={task.id}
-          onChangeDone={() => setTaskDone(task.id)}
+          onChangeDone={setTaskDone}
+          onDelete={deleteTask}
           {...task}
         />
       ))}
@@ -24,6 +25,7 @@ Tasks.propTypes = {
     }),
   ).isRequired,
   setTaskDone: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 };
 
-export default Tasks;
+export default React.memo(Tasks);
