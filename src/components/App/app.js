@@ -1,5 +1,6 @@
-/* eslint-disable react/prefer-stateless-function */
+
 // == Import
+import React from 'react';
 import data from '../../data/tasks';
 
 import './styles.scss';
@@ -10,9 +11,8 @@ class App extends React.Component {
 
     this.state = {
     tasks: data,
+    value: '',
     };
-
-    this.state = {value: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,7 +29,6 @@ class App extends React.Component {
 
   componentDidMount(){
     const {tasks} = this.state;
-
   }
 
 
