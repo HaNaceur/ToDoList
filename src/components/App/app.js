@@ -1,84 +1,77 @@
-
-// == Import
 import React from 'react';
-import data from '../../data/tasks';
+import Counter from '../Counter/Counter';
+import Form from '../Form/Form';
+import Tasks from '../Tasks/Tasks';
+import tasksData from '../../data/tasks';
 
-import './styles.scss';
+import './style.scss';
 
 class App extends React.Component {
   constructor(props) {
-    super(props); 
-
+    super(props);
     this.state = {
-    tasks: data,
-    value: '',
+      tasks: tasksData,
+    };
+  }
+
+  addTask = (taskLabel) => {
+    const { tasks } = this.state;
+    const ids = tasks.map((task) => task.id);
+    const maxId = Math.max(...ids);
+
+    const newTask = {
+      id: maxId + 1,
+      done: false,
+      label: taskLabel,
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    const newTasks = [...tasks, newTask];
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+    this.setState({
+      tasks: newTasks,
+    });
+  };
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
+  setTaskDone = (taskId) => {
+    const { tasks } = this.state;
 
-  componentDidMount(){
-    const {tasks} = this.state;
-  }
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          done: !task.done,
+        };
+      }
 
+      return task;
+    });
+
+    this.setState({
+      tasks: newTasks,
+    });
+  };
 
   render() {
+    const { tasks } = this.state;
+    const undoneTasks = tasks.filter((task) => !task.done);
+    const doneTasks = tasks.filter((task) => task.done);
+    const sortedTasks = [...undoneTasks, ...doneTasks];
 
-  const {tasks} = this.state ;
-  const [count, setCount] = useState(0);
-  const incrementCount = () => {
-    // Update state with incremented value
-    setCount(count + 1);
-  };
-  const [checked, setChecked] = React.useState(false);
-  const placeholder = 'Add a task';
-
-const handleChange = () => {
-  setChecked(!checked);
-};
+    const undoneTasksNumber = undoneTasks.length;
 
     return (
-        <div className="app">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <label>
-         <input type="text" className="form-item" placeholder={placeholder}
-         value={this.state.value} onChange={this.handleChange}
-         />
-         <input type="submit" value="Submit" />
-         </label>
-        </form>
-       
-        <p className="counter">{count} Tâches en cour {count > 1 && 's'}</p>
-        <label> 
-        <input type="checkbox" checked={checked}
-          onChange={handleChange} onClick={incrementCount} 
+      <div className="todolist">
+        <Form
+          onSubmitForm={this.addTask}
         />
-        </label>
-        <ul className="list">
-               {tasks.map((task, index) => ( 
-            <li
-              key={task} 
-            >
-              {tasks}
-            </li>
-          ))}
-        </ul>
-
+        <Counter count={undoneTasksNumber} />
+        <Tasks
+          tasks={sortedTasks}
+          setTaskDone={this.setTaskDone}
+        />
       </div>
     );
   }
 }
 
-// == Export
 export default App;
-
