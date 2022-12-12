@@ -4,7 +4,7 @@ import Form from '../Form/Form';
 import Tasks from '../Tasks/Tasks';
 import tasksData from '../../data/tasks';
 
-import './style.scss';
+import './styles.scss';
 
 class App extends React.Component {
   constructor(props) {
