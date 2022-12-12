@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style.scss';
+import './styles.scss';
 
 class Form extends React.Component {
   state = {

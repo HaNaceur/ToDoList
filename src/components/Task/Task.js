@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'; // https://www.npmjs.com/package/classnames
-import './style.scss';
+import './styles.scss';
 
 function Task({
   id,

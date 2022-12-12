@@ -25,4 +25,4 @@ Counter.defaultProps = {
   count: 0,
 };
 
-export default Counter;
+export default React.memo(Counter);
