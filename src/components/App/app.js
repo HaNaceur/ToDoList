@@ -6,16 +6,18 @@ import tasksData from '../../data/tasks';
 
 import './styles.scss';
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: tasksData,
-    };
+function App (props) {
+
+const [tasks, setTasks]=useState([]);
+
+
+    localStorage.setItem('monChat', 'Tom');
+    const tasks = localStorage.getItem('tasks');
+    const myJson= JSON.parse(tasksFromLocalStorage);
   }
 
   addTask = (taskLabel) => {
-    const { tasks } = this.state;
+    const { tasks } = state;
     // on trouve l'id le plus grand pour générer un nouvel id
     const ids = tasks.map((task) => task.id); // [42,1,10,12]
     const maxId = Math.max(...[0, ids]); // on ajoute un 0 au cas où ids est vide
@@ -27,7 +29,7 @@ class App extends React.PureComponent {
     };
 
     const newTasks = [...tasks, newTask];
-    this.setState({
+    setState({
       tasks: newTasks,
     });
 
@@ -43,7 +45,7 @@ class App extends React.PureComponent {
   };
 
   setTaskDone = (taskId) => {
-    const { tasks } = this.state;
+    const { tasks } = state;
 
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -76,7 +78,7 @@ class App extends React.PureComponent {
 
   deleteTask = (id) => {
     // on recupere le tableau task du state
-    const { tasks } = this.state;
+    const { tasks } = state;
 
     // on clone le tableau tasks en supprimant la tache ayant l'id passé en parametre
     const newTasks = tasks.filter((task) => {
@@ -90,7 +92,7 @@ class App extends React.PureComponent {
     });
 
     // et on modifie le state avec le nouveau tableau cloné (immutabilité)
-    this.setState({
+    setState({
       tasks: newTasks,
     });
 
@@ -100,8 +102,8 @@ class App extends React.PureComponent {
     // }));
   };
 
-  render() {
-    const { tasks } = this.state;
+ 
+    const { tasks } = state;
     const undoneTasks = tasks.filter((task) => !task.done);
     const doneTasks = tasks.filter((task) => task.done);
     const sortedTasks = [...undoneTasks, ...doneTasks];
@@ -111,17 +113,17 @@ class App extends React.PureComponent {
     return (
       <div className="todolist">
         <Form
-          onSubmitForm={this.addTask}
+          onSubmitForm={addTask}
         />
         <Counter count={undoneTasksNumber} />
         <Tasks
           tasks={sortedTasks}
-          setTaskDone={this.setTaskDone}
-          deleteTask={this.deleteTask}
+          setTaskDone={setTaskDone}
+          deleteTask={deleteTask}
         />
       </div>
     );
-  }
-}
+  
+
 
 export default App;
