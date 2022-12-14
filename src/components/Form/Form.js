@@ -1,64 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import './styles.scss';
+import './style.scss';
 
-class Form extends React.PureComponent {
-  state = {
-    inputValue: '',
-  };
+function Form({ onSubmitForm }) {
+  const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef();
 
-  inputRef = React.createRef();
-
-  componentDidMount() {
-    // STOOOOPPPP on ne fais plus ca ! On passe par react
-    // const input = document.querySelector('input.form__input');
-
-    console.log(this.inputRef); // inputRef contient une référence vers l'element du DOM de mon input,
-    // c'est un objet avec une clé current { current: domElement }
-    if (this.inputRef.current) {
-      // une bonne pratique consiste à vérifier l'élément existe avant de faire des opérations dessus
-      this.inputRef.current.focus();
-      // on fait nos opération sur la ref après le 1er rendu, car sinon inputRef.current n'aurait pas de valeur
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }
+  }, []);
 
-  handleOnSubmit = (event) => {
-    const { onSubmitForm } = this.props;
-    const { inputValue } = this.state;
-
+  const handleOnSubmit = (event) => {
     event.preventDefault();
     onSubmitForm(inputValue);
 
-    this.setState({
-      inputValue: '',
-    });
+    setInputValue('');
   };
 
-  handleOnChange = (event) => {
-    this.setState({
-      inputValue: event.target.value,
-    });
+  const handleOnChange = (event) => {
+    setInputValue(event.target.value);
   };
 
-  render() {
-    console.log(this.inputRef);
-    const { inputValue } = this.state;
-
-    return (
-      <form onSubmit={this.handleOnSubmit} className="form">
-        <input
+  return (
+    <form onSubmit={handleOnSubmit} className="form">
+      <input
           // autoFocus aurait pu suffir, mais içi on s'entraine
-          ref={this.inputRef}
-          type="text"
-          placeholder="Ajouter une tâche"
-          className="form__input"
-          value={inputValue}
-          onChange={this.handleOnChange}
-        />
-      </form>
-    );
-  }
+        ref={inputRef}
+        type="text"
+        placeholder="Ajouter une tâche"
+        className="form__input"
+        value={inputValue}
+        onChange={handleOnChange}
+      />
+    </form>
+  );
 }
 
 Form.propTypes = {

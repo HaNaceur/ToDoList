@@ -12,7 +12,7 @@ function App() {
   const addTask = (taskLabel) => {
     // on trouve l'id le plus grand pour générer un nouvel id
     const ids = tasks.map((task) => task.id); // [42,1,10,12]
-    const maxId = Math.max(...[0, ids]); // on ajoute un 0 au cas où ids est vide
+    const maxId = Math.max(...[0, ...ids]); // on ajoute un 0 au cas où ids est vide
 
     setTasks((oldTasks) => [
       ...oldTasks, {
