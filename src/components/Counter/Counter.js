@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import './styles.scss';
 
 function Counter({ count }) {
-  let text = 'Aucune tâche en cours';
+  let text = 'No task in progress';
 
   if (count === 1) {
-    text = `${count} tâche en cours`;
+    text = `${count} task in progress`;
   }
   else if (count > 1) {
-    text = `${count} tâches en cours`;
+    text = `${count} tasks in progress`;
   }
 
   return (

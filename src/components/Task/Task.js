@@ -4,7 +4,7 @@ import classnames from 'classnames'; // https://www.npmjs.com/package/classnames
 import { Trash2 } from 'react-feather';
 import DOMPurify from 'dompurify';
 
-import './style.scss';
+import './styles.scss';
 
 function Task({
   id,
@@ -16,9 +16,19 @@ function Task({
   const [isNew, setIsNew] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setIsNew(false);
+      console.log({
+        isNew, setIsNew, done, id, label,
+      });
     }, 5000);
+    // attention si le composant disparait avant que le setTimeout ne se produise on aura une fuite de memoire,
+    // car le timeout tiendra toujours une relation avec le composant, et celui même non affiché, ne sera pas supprimé de la RAM
+    return () => {
+      // donc on fait une fonction de nettoyage pour supprimer le timeout
+      clearTimeout(timeoutId);
+      console.log('clearTimeout');
+    };
   }, []);
 
   return (

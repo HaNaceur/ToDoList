@@ -36,8 +36,9 @@ function Form({ onSubmitForm }) {
       />
       <button
         type="submit"
+        className="form__button"
       >
-        Ajouter
+        Add
       </button>
     </form>
   );

@@ -38,11 +38,13 @@ function App() {
     const maxId = Math.max(...[0, ...ids]); // on ajoute un 0 au cas où ids est vide
 
     setTasks((oldTasks) => [
-      ...oldTasks, {
+      {
         id: maxId + 1,
         done: false,
         label: taskLabel,
-      }]);
+      },
+      ...oldTasks,
+    ]);
   };
 
   const setTaskDone = (taskId) => {

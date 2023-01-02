@@ -7,7 +7,12 @@ export default [
   {
     id: 13,
     label: 'Coder une todolist en React',
-    done: false,
+    done: true,
+  },
+  {
+    id: 16,
+    label: 'Kiffer',
+    done: true,
   },
   {
     id: 4,
@@ -17,6 +22,11 @@ export default [
   {
     id: 8,
     label: 'Préparer des crêpes',
+    done: false,
+  },
+  {
+    id: 18,
+    label: 'Découvrir les hooks',
     done: false,
   },
 ];

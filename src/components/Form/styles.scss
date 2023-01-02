@@ -1,5 +1,7 @@
 @use "src/styles/vars" as v;
 
+$radius: 3px;
+
 .form {
   margin-bottom: v.$gutter * 2;
   display: flex;
@@ -9,7 +11,7 @@
   &__input {
     width: 100%;
     background-color: v.$color-input;
-    border-radius: 3px;
+    border-radius: $radius;
     box-shadow: v.$color-shadow;
     padding: v.$gutter * 0.5;
     font-size: 2em;
@@ -37,6 +39,6 @@
     margin: v.$gutter 0;
     padding: v.$gutter * 0.5;
     font-size: 1.1em;
-    border-radius: 5px;
+    border-radius: $radius;
   }
 }

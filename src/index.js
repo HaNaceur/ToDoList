@@ -1,5 +1,6 @@
 // == Import : npm
 import { createRoot } from 'react-dom/client';
+import 'react-quill/dist/quill.bubble.css';
 
 // == Import : local
 // Composants
