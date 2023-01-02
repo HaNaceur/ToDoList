@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactQuill from 'react-quill';
 
-import './style.scss';
+import './styles.scss';
 
 function Form({ onSubmitForm }) {
   const [inputValue, setInputValue] = useState('');
@@ -26,15 +27,18 @@ function Form({ onSubmitForm }) {
 
   return (
     <form onSubmit={handleOnSubmit} className="form">
-      <input
-          // autoFocus aurait pu suffir, mais içi on s'entraine
-        ref={inputRef}
-        type="text"
-        placeholder="Ajouter une tâche"
+      <ReactQuill
         className="form__input"
+        theme="bubble"
         value={inputValue}
-        onChange={handleOnChange}
+        onChange={setInputValue}
+
       />
+      <button
+        type="submit"
+      >
+        Ajouter
+      </button>
     </form>
   );
 }

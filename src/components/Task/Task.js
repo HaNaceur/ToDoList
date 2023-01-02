@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'; // https://www.npmjs.com/package/classnames
 import { Trash2 } from 'react-feather';
-import './styles.scss';
+import DOMPurify from 'dompurify';
+
+import './style.scss';
 
 function Task({
   id,
@@ -11,11 +13,17 @@ function Task({
   onChangeDone,
   onDelete,
 }) {
-  // classnames est un petit outil qui permet de créer des classNames propre super simplement et proprement
-  // meme lorsqu'il y a des conditions
+  const [isNew, setIsNew] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsNew(false);
+    }, 5000);
+  }, []);
+
   return (
-    <li className={classnames('task', { 'task--done': done })}>
-      <div>
+    <li className={classnames('task', { 'task--done': done, 'task--new': isNew })}>
+      <div className="task__text">
         <input
           type="checkbox"
           className="task__checkbox"
@@ -23,7 +31,10 @@ function Task({
           checked={done}
           onChange={() => onChangeDone(id)}
         />
-        <label htmlFor={id}>{label}</label>
+        <label
+          htmlFor={id}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(label) }}
+        />
       </div>
       <button
         type="button"

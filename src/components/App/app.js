@@ -1,13 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Counter from '../Counter/Counter';
 import Form from '../Form/Form';
 import Tasks from '../Tasks/Tasks';
-import tasksData from '../../data/tasks';
 
-import './style.scss';
+import './styles.scss';
 
 function App() {
-  const [tasks, setTasks] = useState(tasksData);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    // effet sur le mount
+    try {
+      const tasksFromLocalStorage = localStorage.getItem('tasks');
+      if (!tasksFromLocalStorage) return;
+      // si on a une valeur dans le localStorage pour tasks
+      const parsedTasks = JSON.parse(tasksFromLocalStorage);
+      if (!Array.isArray(parsedTasks)) return;
+      setTasks(parsedTasks);
+    }
+    // eslint-disable-next-line no-empty
+    catch (err) {
+      // on catch au cas où on est une erreur sur le JSON.parse
+      setTasks([]); // si on a eu une erreur on met tableau vide pour être sure
+    }
+  }, []);
+
+  useEffect(() => {
+    // effet sur le mount ou quand tasks est modifié
+    // on fait 2 effets bien distinct entre le set et le get, pour avoir un code plus propre
+    const stringifiedTasks = JSON.stringify(tasks);
+    localStorage.setItem('tasks', stringifiedTasks);
+  }, [tasks]);
 
   const addTask = (taskLabel) => {
     // on trouve l'id le plus grand pour générer un nouvel id

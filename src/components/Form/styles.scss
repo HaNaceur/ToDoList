@@ -1,20 +1,42 @@
-@use 'src/styles/vars' as v;
+@use "src/styles/vars" as v;
 
 .form {
+  margin-bottom: v.$gutter * 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
   &__input {
     width: 100%;
     background-color: v.$color-input;
-    border: 1px solid v.$color-border;
+    border-radius: 3px;
     box-shadow: v.$color-shadow;
-    padding: v.$gutter * 2 v.$gutter * 3;
-    color: v.$color-light;
+    padding: v.$gutter * 0.5;
     font-size: 2em;
-    margin-bottom: v.$gutter * 5;
+
     &:focus {
       box-shadow: v.$color-shadow-focus;
     }
+
     &::placeholder {
       color: v.$color-placeholder;
     }
+
+    strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  &__button {
+    width: 6rem;
+    border: none;
+    margin: v.$gutter 0;
+    padding: v.$gutter * 0.5;
+    font-size: 1.1em;
+    border-radius: 5px;
   }
 }

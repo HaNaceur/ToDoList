@@ -11,10 +11,56 @@
   justify-content: space-between;
   align-items: center;
 
+  position: relative;
+
   &--done {
     text-decoration: line-through;
     opacity: 0.5;
   }
+  &--new::before {
+    content: "nouveau";
+    position: absolute;
+    padding: v.$gutter * 0.5;
+    top: 0;
+    left: 0;
+    font-style: italic;
+    font-size: 0.9em;
+    color: #bcbcbc;
+  }
+
+  &__text {
+    display: flex;
+
+    label {
+      position: relative;
+      strong {
+        font-weight: bold;
+      }
+      em {
+        font-style: italic;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      h2 {
+        font-size: 1.3em;
+      }
+      blockquote {
+        padding-left: 0.5em;
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 0.2em;
+          height: 100%;
+          background-color: #bcbcbc;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+
   &__checkbox {
     margin-right: v.$gutter;
   }
