@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.bubble.css';
 
 // == Import : local
 // Composants
-import App from 'src/components/App/App';
+import App from './components/App/App';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
